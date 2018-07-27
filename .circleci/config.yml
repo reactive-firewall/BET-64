@@ -1,0 +1,58 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/python-repo
+    docker:
+      - image: circleci/python:3.6.1
+        environment:
+          CI: cicleci
+          DEBIAN_FRONTEND: noninteractive
+          SHELL: /bin/bash
+    steps:
+      - checkout
+      - run:
+          shell: /bin/bash
+          name: "fetch and pull"
+          command: |
+            git fetch && git pull --all || true
+      - run:
+          shell: /bin/bash
+          name: "install depends attempt"
+          command: |
+            python3 -m pip install --user -r ./requirements.txt || true
+      - run:
+          shell: /bin/bash
+          name: "install coverage attempt"
+          command: |
+            python3 -m pip install --user coverage || true
+      - run:
+          shell: /bin/bash
+          name: "install flake8 attempt"
+          command: |
+            python3 -m pip install --user flake8 || true
+      - run:
+          shell: /bin/bash
+          name: "clean up for test"
+          command: |
+            make clean
+      - run:
+          shell: /bin/bash
+          name: "Unit Tests"
+          command: |
+            make test
+      - run:
+          shell: /bin/bash
+          name: "clean up from test"
+          command: |
+            make clean
+      - run:
+          shell: /bin/bash
+          name: "check code style and spelling"
+          command: |
+            make test-style || python3 -m flake8 --ignore=W191,W391 --max-line-length=100 --verbose --count --config=.flake8.ini --max-complexity=15
+      - run:
+          shell: /bin/bash
+          name: "clean up when done"
+          command: |
+            make clean
+destination: build
