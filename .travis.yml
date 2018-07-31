@@ -167,11 +167,11 @@ script:
   - make clean ;
   - if [ $TRAVIS_OS_NAME == osx ] ; then echo "SKIP make test" ; else make test || exit $? ; fi ;
   - if [ $TRAVIS_OS_NAME == osx ] || [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov || exit $? ; fi ;
-  - cp -vf .coverage ".coverall.Lasting.45678.12345" 2>/dev/null || true
+  - cp -vf .coverage ".coverall.Lasting.45678.54321" 2>/dev/null || true
   - make clean || exit $? ;
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP make test-tox" ; else make test-tox || exit $? ; fi ;
   - make clean ;
-  - mv -vf ".coverall.Lasting.45678.12345" .coverage 2>/dev/null || true
+  - mv -vf ".coverall.Lasting.45678.54321" .coverage 2>/dev/null || true
 
 after_failure:
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP coverage" ; else coverage combine 2>/dev/null || true ; fi ;
@@ -179,7 +179,7 @@ after_failure:
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov 2>/dev/null || true ; fi ;
   - if [ $TRAVIS_OS_NAME == osx ] || [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP code climate" ; else ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true ; fi ;
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov 2>/dev/null || true ; fi ;
-  - make clean 2>/dev/nul || true
+  - make clean 2>/dev/null || true
 
 after_success:
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP coverage" ; else coverage combine 2>/dev/null || true ; fi ;
@@ -188,9 +188,4 @@ after_success:
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov || true ; fi ;
   - travis_retry python3 -m pip install python-coveralls || python3 -m pip install python-coveralls || true ;
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else coveralls 2>/dev/null || true ; fi ;
-  - travis_wait 35 curl --url "https://scan.coverity.com/download/linux64?token=${COVERTY_TOKEN}&project=reactive-firewall%2Fpython-repo" -o coverity_tool.tgz || true
-  - travis_wait tar xzf coverity_tool.tgz || true
-  - rm -fr cov-int || true
-  - cov-build --dir cov-int ./ || true
-  - curl --form token=${COVERTY_TOKEN} --form email=${RF_EMAIL} --form file=@./coverty.tar.gz --form version=1.0 --form description="Python Repo - (Travis CI Build)" https://scan.coverity.com/builds?project=reactive-firewall%2Fpython-repo || true
 
