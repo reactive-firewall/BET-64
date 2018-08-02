@@ -1,6 +1,23 @@
 #!/usr/bin/env make -f
 
-# Python Repo Template
+# BET-64 Tools
+# ..................................
+# Copyright (c) 2018, Kendrick Walls
+# ..................................
+# Licensed under MIT (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# ..........................................
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
+# ..........................................
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# Started with Python Repo Template
 # ..................................
 # Copyright (c) 2017-2018, Kendrick Walls
 # ..................................
@@ -64,23 +81,23 @@ init:
 	$(QUIET)$(ECHO) "$@: Done."
 
 install: must_be_root
-	$(QUIET)python3 -m pip install "git+https://github.com/reactive-firewall/pythonrepo.git#egg=pythonrepo"
+	$(QUIET)python3 -m pip install "git+https://github.com/reactive-firewall/BET-64.git#egg=BET64"
 	$(QUITE)$(WAIT)
 	$(QUIET)$(ECHO) "$@: Done."
 
 uninstall:
-	$(QUITE)$(QUIET)python3 -m pip uninstall pythonrepo || true
+	$(QUITE)$(QUIET)python3 -m pip uninstall BET64 || true
 	$(QUITE)$(WAIT)
 	$(QUIET)$(ECHO) "$@: Done."
 
 purge: clean uninstall
-	$(QUIET)python3 -m pip uninstall pythonrepo && python -m pip uninstall pythonrepo || true
+	$(QUIET)python3 -m pip uninstall BET64 && python -m pip uninstall BET64 || true
 	$(QUIET)$(ECHO) "$@: Done."
 
 test: cleanup
-	$(QUIET)coverage run -p --source=pythonrepo -m unittest discover --verbose -s ./tests -t ./ || python3 -m unittest discover --verbose -s ./tests -t ./ || python -m unittest discover --verbose -s ./tests -t ./ || DO_FAIL=exit 2 ;
+	$(QUIET)coverage run -p --source=BET64 -m unittest discover --verbose -s ./tests -t ./ || python3 -m unittest discover --verbose -s ./tests -t ./ || python -m unittest discover --verbose -s ./tests -t ./ || DO_FAIL=exit 2 ;
 	$(QUIET)coverage combine 2>/dev/null || true
-	$(QUIET)coverage report --include=pythonrepo* 2>/dev/null || true
+	$(QUIET)coverage report --include=BET64* 2>/dev/null || true
 	$(QUIET)$(DO_FAIL);
 	$(QUIET)$(ECHO) "$@: Done."
 
@@ -97,18 +114,18 @@ cleanup:
 	$(QUIET)rm -f tests/*.pyc 2>/dev/null || true
 	$(QUIET)rm -f tests/*~ 2>/dev/null || true
 	$(QUIET)rm -Rf tests/__pycache__ 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*.pyc 2>/dev/null || true
-	$(QUIET)rm -Rf pythonrepo/__pycache__ 2>/dev/null || true
-	$(QUIET)rm -Rf pythonrepo/*/__pycache__ 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*~ 2>/dev/null || true
+	$(QUIET)rm -f BET64/*.pyc 2>/dev/null || true
+	$(QUIET)rm -Rf BET64/__pycache__ 2>/dev/null || true
+	$(QUIET)rm -Rf BET64/*/__pycache__ 2>/dev/null || true
+	$(QUIET)rm -f BET64/*~ 2>/dev/null || true
 	$(QUIET)rm -f *.pyc 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*/*.pyc 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*/*~ 2>/dev/null || true
+	$(QUIET)rm -f BET64/*/*.pyc 2>/dev/null || true
+	$(QUIET)rm -f BET64/*/*~ 2>/dev/null || true
 	$(QUIET)rm -f *.DS_Store 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*.DS_Store 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo/*/*.DS_Store 2>/dev/null || true
-	$(QUIET)rm -f pythonrepo.egg-info/* 2>/dev/null || true
-	$(QUIET)rmdir pythonrepo.egg-info 2>/dev/null || true
+	$(QUIET)rm -f BET64/*.DS_Store 2>/dev/null || true
+	$(QUIET)rm -f BET64/*/*.DS_Store 2>/dev/null || true
+	$(QUIET)rm -f BET64.egg-info/* 2>/dev/null || true
+	$(QUIET)rmdir BET64.egg-info 2>/dev/null || true
 	$(QUIET)rm -f ./*/*~ 2>/dev/null || true
 	$(QUIET)rm -f ./*~ 2>/dev/null || true
 	$(QUIET)coverage erase 2>/dev/null || true
