@@ -1,15 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Python Repo Template
+# BET-64 Tool
 # ..................................
-# Copyright (c) 2017, Kendrick Walls
+# Copyright (c) 2018, Kendrick Walls
 # ..................................
 # Licensed under MIT (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# https://www.github.com/reactive-firewall/BET-64.git/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ def readFile(filename="""./README.md"""):
 			theResult = f.read()
 	except Exception:
 		theResult = str(
-			"""See https://github.com/reactive-firewall/python-repo/{}"""
+			"""See https://github.com/reactive-firewall/BET-64/{}"""
 		).format(filename)
 	return theResult
 
@@ -47,14 +47,14 @@ readme = readFile("""README.md""")
 license = readFile("""LICENSE.md""")
 
 setup(
-	name="""pythonrepo""",
-	version="""1.0.2""",
-	description="""Python Repo""",
+	name="""BET64""",
+	version="""1.0.0""",
+	description="""BET-64 tools""",
 	long_description=readme,
 	install_requires=requirements,
 	author="""reactive-firewall""",
 	author_email="""reactive-firewall@users.noreply.github.com""",
-	url="""https://github.com/reactive-firewall/python-repo.git""",
+	url="""https://github.com/reactive-firewall/BET-64.git""",
 	license=license,
 	packages=find_packages(exclude=("""tests""", """docs""")),
 )
