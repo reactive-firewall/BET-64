@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Python Repo Template
+# BET-64 Tools
 # ..................................
-# Copyright (c) 2017, Kendrick Walls
+# Copyright (c) 2018, Kendrick Walls
 # ..................................
 # Licensed under MIT (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@
 try:
 	import sys
 	import os
-	if 'pythonrepo' in __file__:
+	if 'BET64' in __file__:
 		sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 except Exception as ImportErr:
 	print(str(type(ImportErr)))
@@ -28,15 +28,15 @@ except Exception as ImportErr:
 	print(str((ImportErr.args)))
 	ImportErr = None
 	del ImportErr
-	raise ImportError("Python Repo Failed to Import")
+	raise ImportError("BET-64 Tool Failed to Import")
 
 
 try:
-	import pythonrepo as pythonrepo
-	if pythonrepo.__name__ is None:
-		raise ImportError("Failed to import pythonrepo.")
+	import BET64 as BET64
+	if BET64.__name__ is None:
+		raise ImportError("Failed to import BET-64.")
 except Exception as importErr:
 	importErr = None
 	del importErr
-	raise ImportError("Test module failed to load pythonrepo for test.")
+	raise ImportError("Test module failed to load BET-64 for test.")
 	exit(0)
