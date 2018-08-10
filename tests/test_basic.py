@@ -1,15 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Python Repo Template
+# BET-64 Tool
 # ..................................
-# Copyright (c) 2017, Kendrick Walls
+# Copyright (c) 2018, Kendrick Walls
 # ..................................
 # Licensed under MIT (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,12 +35,12 @@ class BasicTestSuite(unittest.TestCase):
 		self.assertIsNone(None)
 
 	def test_syntax(self):
-		"""Test case importing pythonrepo."""
+		"""Test case importing BET64."""
 		theResult = False
 		try:
-			from .context import pythonrepo
-			self.assertIsNotNone(pythonrepo.__name__)
-			if pythonrepo.__name__ is None:
+			from .context import BET64
+			self.assertIsNotNone(BET64.__name__)
+			if BET64.__name__ is None:
 				theResult = False
 			theResult = True
 		except Exception as impErr:
@@ -53,14 +53,14 @@ class BasicTestSuite(unittest.TestCase):
 		"""Test case for backend library."""
 		theResult = False
 		try:
-			from .context import pythonrepo
-			self.assertIsNotNone(pythonrepo.__name__)
-			if pythonrepo.__name__ is None:
+			from .context import BET64
+			self.assertIsNotNone(BET64.__name__)
+			if BET64.__name__ is None:
 				theResult = False
 			with self.assertRaises(Exception):
 				raise RuntimeError("This is a test")
 			with self.assertRaises(Exception):
-				pythonrepo.main(["--help"])
+				BET64.main(["--help"])
 			theResult = True
 		except Exception:
 			theResult = False
@@ -70,12 +70,12 @@ class BasicTestSuite(unittest.TestCase):
 		"""Example Test case for bad input directly into function."""
 		theResult = False
 		try:
-			from .context import pythonrepo
-			if pythonrepo.__name__ is None:
+			from .context import BET64
+			if BET64.__name__ is None:
 				theResult = False
-			from pythonrepo import pythonrepo as pythonrepo
-			self.assertIsNone(pythonrepo.useTool(None))
-			self.assertIsNone(pythonrepo.useTool("JunkInput"))
+			from BET64 import BET64 as BET64
+			self.assertIsNone(BET64.useTool(None))
+			self.assertIsNone(BET64.useTool("JunkInput"))
 			theResult = True
 		except Exception:
 			theResult = False
