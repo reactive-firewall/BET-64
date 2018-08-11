@@ -1,15 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Python Repo Template
+# BET-64 Tool
 # ..................................
-# Copyright (c) 2017-2018, Kendrick Walls
+# Copyright (c) 2018, Kendrick Walls
 # ..................................
 # Licensed under MIT (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,7 +55,7 @@ def buildPythonCommand(args=None):
 	"""Function for building backend subprocess command line"""
 	theArgs = args
 	# you need to change this to the name of your project
-	__project__ = str("pythonrepo")
+	__project__ = str("BET64")
 	try:
 		if args is None or args is [None]:
 			theArgs = ["exit 1 ; #"]
@@ -170,8 +170,8 @@ class BasicUsageTestSuite(unittest.TestCase):
 		"""Test case importing code. if ( import is not None ) """
 		theResult = False
 		try:
-			from .context import pythonrepo
-			if pythonrepo.__name__ is None:
+			from .context import BET64
+			if BET64.__name__ is None:
 				theResult = False
 			theResult = True
 		except Exception as impErr:
@@ -181,16 +181,16 @@ class BasicUsageTestSuite(unittest.TestCase):
 		assert theResult
 
 	def test_template_case(self):
-		"""Test case template for: python -m pythonrepo.* --version """
+		"""Test case template for: python -m BET64.* --version """
 		theResult = False
 		thepython = getPythonCommand()
 		if (thepython is not None):
 			try:
-				for test_case in ["pythonrepo"]:
+				for test_case in ["BET64"]:
 					args = [
 						str(thepython),
 						str("-m"),
-						str("pythonrepo.{}").format(
+						str("BET64.{}").format(
 							str(
 								test_case
 							)
@@ -229,7 +229,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 					args = [
 						str(thepython),
 						str("-m"),
-						str("pythonrepo.pythonrepo"),
+						str("BET64.BET64"),
 						str("{}").format(
 							str(
 								test_case
@@ -268,7 +268,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 					args = [
 						str(thepython),
 						str("-m"),
-						str("pythonrepo.pythonrepo"),
+						str("BET64.BET64"),
 						str("{}").format(
 							str(
 								test_case
@@ -307,7 +307,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 					args = [
 						str(thepython),
 						str("-m"),
-						str("pythonrepo.pythonrepo"),
+						str("BET64.BET64"),
 						str("{}").format(
 							str(
 								test_case
