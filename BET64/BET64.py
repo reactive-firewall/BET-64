@@ -1,15 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Python Repo Template
+# BET-64 Tool
 # ..................................
-# Copyright (c) 2017-2018, Kendrick Walls
+# Copyright (c) 2018, Kendrick Walls
 # ..................................
 # Licensed under MIT (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,8 +41,8 @@ except Exception as err:
 	raise ImportError(str("Error Importing Python"))
 
 
-__prog__ = str("""pythonrepo""")
-"""The name of this program is PythonRepo"""
+__prog__ = str("""BET64""")
+"""The name of this program is BET-64"""
 
 
 __description__ = str(
