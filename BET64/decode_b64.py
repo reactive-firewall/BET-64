@@ -1,11 +1,15 @@
 #! /usr/bin/env python
 
+# TODO: add Header
+
 import argparse
 import os
 import base64
 import re
 import subprocess
 import hashlib
+
+# TODO: add function for args
 
 parser = argparse.ArgumentParser(prog='decode_b64', description='Decodes the content of a b64 file', epilog="Usually used to extract the file data from a b64 file. Remember last option wins.")
 parser.add_argument('-i', '--in', dest='input_file', required=True, help='The b64 file to read')
@@ -26,6 +30,7 @@ parser.add_argument('-d', '--decode-gpg-mode', dest='decode_gpg_mode', default=F
 parser.add_argument('-V', '--version', action='version', version='%(prog)s 6.1', help='NOT IMPLEMENTD, TL;DR versioning code implies that there is a version, as these tools have yet to transgress the sophomoric solutions of the novice, version shall be ignored')
 # Lazy version 20160806
 
+# TODO: improve read-write kludge into code
 
 def readFile(somefile, AndDecodePGPifNeeded=False):
 	read_data = None
@@ -106,6 +111,9 @@ def extractPGPMessage(theInputStr):
 
 def extractPGPEndHeader(theInputStr):
 	return extractRegexPattern(theInputStr, "(?P<end_Header>(?:[-]{5}){1}(?:[E]{1}[N]{1}[D]{1}[\ ]{1}[P]{1}[G]{1}[P]{1}[\ ]{1}[M]{1}[E]{1}[S]{2}[A]{1}[G]{1}[E]{1}){1}(?:[-]{5}){1})")[0]
+
+
+#TODO: fix temp file name to use safe values
 
 def decodePGPMessage(somefile, saveTmpFile=False):
 	tmpName=str("/tmp/pgp_content_")+str(os.getpid())+str("_SWAP.data")
@@ -246,6 +254,8 @@ def calculateAllFileMetadata(theInputStr):
 	cleanTempFile()
 	return theResult
 
+
+#TODO create MAIN sections
 
 args = parser.parse_args()
 try:
