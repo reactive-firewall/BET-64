@@ -17,7 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
 import unittest
 
 
@@ -28,7 +27,7 @@ class BasicTestSuite(unittest.TestCase):
 		"""Insanitty Test. Because it only matters if we're not mad as hatters."""
 		assert True
 
-	def test_meta_test(self):
+	def setUp(self):
 		"""Insanity Test for unittests assertion."""
 		self.assertTrue(True)
 		self.assertFalse(False)
@@ -66,6 +65,21 @@ class BasicTestSuite(unittest.TestCase):
 			theResult = False
 		assert theResult
 
+	def test_the_version_command(self):
+		"""Test case for backend library."""
+		theResult = False
+		try:
+			from .context import BET64
+			self.assertIsNotNone(BET64.__name__)
+			if BET64.__name__ is None:
+				theResult = False
+			with self.assertRaises(Exception):
+				BET64.main(["--version"])
+			theResult = True
+		except Exception:
+			theResult = False
+		assert theResult
+
 	def test_corner_case_example(self):
 		"""Example Test case for bad input directly into function."""
 		theResult = False
@@ -80,16 +94,6 @@ class BasicTestSuite(unittest.TestCase):
 		except Exception:
 			theResult = False
 		assert theResult
-
-	def test_new_tests(self):
-		"""Try adding new tests."""
-		self.assertIsNone(None)
-		# define new tests below
-
-	@unittest.skipUnless(sys.platform.startswith("linux"), "This test example requires linux")
-	def test_this_linux_only(self):
-		"""Linux is the test."""
-		self.assertTrue(sys.platform.startswith("linux"))
 
 
 # leave this part

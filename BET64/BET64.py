@@ -19,15 +19,8 @@
 
 
 try:
-	import os
 	import sys
 	import argparse
-	sys.path.insert(
-		0,
-		os.path.abspath(
-			os.path.join(os.path.dirname(__file__), '..')
-		)
-	)
 except Exception as err:
 	# Show Error Info
 	print(str(type(err)))
@@ -57,7 +50,7 @@ __epilog__ = str(
 """Contains the short epilog of the program CLI help text."""
 
 
-__version__ = """1.1.0"""
+__version__ = """1.0.0"""
 """The version of this program."""
 
 
@@ -73,7 +66,10 @@ def NoOp(*args, **kwargs):
 
 
 TASK_OPTIONS = dict({
-	'noop': NoOp
+	'encode': NoOp,
+	'decode': NoOp,
+	'check': NoOp,
+	'type': NoOp
 })
 """The callable function tasks of this program."""
 
@@ -107,9 +103,7 @@ def useTool(tool, arguments=None):
 	"""Handler for launching the functions."""
 	if arguments is None:
 		arguments = [None]
-	if tool is None:
-		return None
-	if tool in TASK_OPTIONS.keys():
+	if (tool is not None) and (tool in TASK_OPTIONS.keys()):
 		try:
 			# print(str("launching: " + tool))
 			TASK_OPTIONS[tool](arguments)

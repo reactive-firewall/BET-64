@@ -5,6 +5,24 @@ python:
 
 dist:
 
+addons:
+  coverity_scan:
+    # GitHub project metadata
+    project:
+      name: reactive-firewall/BET-64
+      version: 1.0.0
+      description: Base-64 Encapsulation Tool
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: make clean
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command: make test
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: master
+
 branches:
   only:
     - stable
@@ -53,6 +71,12 @@ matrix:
   - os: linux
     python:  "pypy3.5-6.0"
   - os: linux
+    python:  "pypy3.5-5.10.0"
+    env: TRAVIS_PYTHON_VERSION="3.5"
+  - os: linux
+    python:  "pypy2.7-5.10.0"
+    env: TRAVIS_PYTHON_VERSION="2.7"
+  - os: linux
     python:  "nightly" # currently points to 3.7-dev
     env: TRAVIS_PYTHON_VERSION="3.7-dev"
   - os: osx
@@ -76,12 +100,24 @@ matrix:
   - os: osx
     osx_image: xcode9.3
     language: generic
+  - os: osx
+    osx_image: xcode9.4
+    language: generic
+  - os: osx
+    osx_image: xcode10
+    language: generic
   allow_failures:
   - os: linux
     python:  "nightly" # currently points to 3.7-dev
     env: TRAVIS_PYTHON_VERSION="3.7-dev"
   - os: osx
     osx_image: xcode6.4
+    language: generic
+  - os: osx
+    osx_image: xcode7.2
+    language: generic
+  - os: osx
+    osx_image: xcode7.3
     language: generic
   - os: linux
     python:  "2.6"
@@ -106,6 +142,12 @@ matrix:
     python:  "pypy3.5-5.8.0"
   - os: linux
     python:  "pypy2.7-5.8.0"
+  - os: linux
+    python:  "pypy3.5-5.10.0"
+    env: TRAVIS_PYTHON_VERSION="3.5"
+  - os: linux
+    python:  "pypy2.7-5.10.0"
+    env: TRAVIS_PYTHON_VERSION="2.7"
   - os: linux
     python:  "pypy3.5-6.0"
   - os: linux
@@ -167,18 +209,18 @@ script:
   - make clean ;
   - if [ $TRAVIS_OS_NAME == osx ] ; then echo "SKIP make test" ; else make test || exit $? ; fi ;
   - if [ $TRAVIS_OS_NAME == osx ] || [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov || exit $? ; fi ;
-  - cp -vf .coverage ".coverall.Lasting.45678.54321" 2>/dev/null || true
+  - cp -vf .coverage ".coverall.Lasting.45678.12345" 2>/dev/null || true
   - make clean || exit $? ;
-  - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP make test-tox" ; else make test-tox || exit $? ; fi ;
-  - make clean ;
-  - mv -vf ".coverall.Lasting.45678.54321" .coverage 2>/dev/null || true
+  - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] || [ $TRAVIS_PYTHON_VERSION == "3.3" ] ; then echo "SKIP make test-tox" ; else make test-tox || exit $? ; fi ;
+  - make clean || true ;
+  - mv -vf ".coverall.Lasting.45678.12345" .coverage 2>/dev/null || true
 
 after_failure:
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP coverage" ; else coverage combine 2>/dev/null || true ; fi ;
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP coverage xml" ; else coverage xml 2>/dev/null || true ; fi ;
   - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov 2>/dev/null || true ; fi ;
-  - if [ $TRAVIS_OS_NAME == osx ] || [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP code climate" ; else ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true ; fi ;
-  - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] ; then echo "SKIP codecov" ; else codecov 2>/dev/null || true ; fi ;
+  - if [ $TRAVIS_OS_NAME == osx ] || [ $TRAVIS_PYTHON_VERSION == "3.2" ] || [ $TRAVIS_PYTHON_VERSION == "3.3" ] ; then echo "SKIP code climate" ; else ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true ; fi ;
+  - if [ $TRAVIS_PYTHON_VERSION == "3.2" ] || [ $TRAVIS_PYTHON_VERSION == "3.3" ] ; then echo "SKIP codecov" ; else codecov 2>/dev/null || true ; fi ;
   - make clean 2>/dev/null || true
 
 after_success:

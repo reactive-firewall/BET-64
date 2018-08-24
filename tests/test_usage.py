@@ -225,7 +225,13 @@ class BasicUsageTestSuite(unittest.TestCase):
 		thepython = getPythonCommand()
 		if (thepython is not None):
 			try:
-				for test_case in ["noop"]:
+				test_cases = [
+					"""--encode""",
+					"""--check""",
+					"""--type""",
+					"""--decode"""
+				]
+				for test_case in test_cases:
 					args = [
 						str(thepython),
 						str("-m"),
@@ -234,7 +240,8 @@ class BasicUsageTestSuite(unittest.TestCase):
 							str(
 								test_case
 							)
-						)
+						),
+						str("./README.md")
 					]
 					theOutputtext = timePythonCommand(args, stderr=subprocess.STDOUT)
 					# now test it
@@ -303,7 +310,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 		thepython = getPythonCommand()
 		if (thepython is not None):
 			try:
-				for test_case in [None]:
+				for test_case in ["""--type"""]:
 					args = [
 						str(thepython),
 						str("-m"),

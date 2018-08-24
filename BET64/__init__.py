@@ -8,7 +8,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 # ..........................................
-# http://www.github.com/reactive-firewall/python-repo/LICENSE.md
+# http://www.github.com/reactive-firewall/BET-64/LICENSE.md
 # ..........................................
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,13 +17,13 @@
 # limitations under the License.
 
 
-__version__ = """1.1.0"""
-"""This is version 1.1.0 of pythonrepo Template"""
+__version__ = """1.0.0"""
+"""This is version 1.0.0 of BET-64"""
 
 try:
 	import sys
 	import os
-	if 'pythonrepo' in __file__:
+	if 'BET64' in __file__:
 		sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 except Exception as ImportErr:
 	print(str(type(ImportErr)))
@@ -31,18 +31,18 @@ except Exception as ImportErr:
 	print(str((ImportErr.args)))
 	ImportErr = None
 	del ImportErr
-	raise ImportError(str("pythonrepo Failed to Import"))
+	raise ImportError(str("BET-64 Failed to Import"))
 
 
 try:
-	from . import pythonrepo as pythonrepo
+	from . import BET64 as BET64
 except Exception as importErr:
 	del importErr
-	import pythonrepo.pythonrepo as pythonrepo
+	import BET64.BET64 as BET64
 
 
 if __name__ in '__main__':
-	if pythonrepo.__name__ is None:
-		raise ImportError(str("Failed to open pythonrepo"))
-	pythonrepo.main(sys.argv[1:])
+	if BET64.__name__ is None:
+		raise ImportError(str("Failed to open BET-64"))
+	BET64.main(sys.argv[1:])
 	exit(0)
