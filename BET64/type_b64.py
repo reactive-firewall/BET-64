@@ -27,10 +27,10 @@ try:
 	import functools
 	import logging
 	logging.basicConfig(
-					level=logging.DEBUG,
-					format=str("%(asctime)s [BET64] %(message)s"),
-					datefmt=str("%a %b %d %H:%M:%S %Z %Y")
-					)
+		level=logging.DEBUG,
+		format=str("%(asctime)s [BET64] %(message)s"),
+		datefmt=str("%a %b %d %H:%M:%S %Z %Y")
+	)
 except Exception as err:
 	# Show Error Info
 	print(str(type(err)))
@@ -83,7 +83,7 @@ def error_breakpoint(error, context=None):
 
 def error_handling(func):
 	"""Runs a function in try-except"""
-	
+
 	@functools.wraps(func)
 	def safety_func(*args, **kwargs):
 		"""Wraps a function in try-except"""
@@ -95,7 +95,7 @@ def error_handling(func):
 			err = None
 			del err
 		return theOutput
-	
+
 	return safety_func
 
 
@@ -552,7 +552,7 @@ def main(argv=None):
 					if type_action in MODE_OPTIONS.keys():
 						print(MODE_OPTIONS[type_action](dataChunk, cacheTmpFiles))
 					else:
-						raise RuntimeException("Checksum passed but action not posible")
+						raise RuntimeError("Checksum passed but action not posible")
 				else:
 					printError("CHECKSUM ERROR: ACTION will not be compleated! see --force")
 				if (fileChunkCount > 1):
