@@ -50,7 +50,7 @@ __epilog__ = str(
 """Contains the short epilog of the program CLI help text."""
 
 
-__version__ = """1.0.0"""
+__version__ = """1.0.1"""
 """The version of this program."""
 
 

@@ -186,7 +186,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 		thepython = getPythonCommand()
 		if (thepython is not None):
 			try:
-				for test_case in ["BET64"]:
+				for test_case in ["__main__"]:
 					args = [
 						str(thepython),
 						str("-m"),
@@ -226,16 +226,16 @@ class BasicUsageTestSuite(unittest.TestCase):
 		if (thepython is not None):
 			try:
 				test_cases = [
-					"""--encode""",
-					"""--check""",
-					"""--type""",
-					"""--decode"""
+					"""encode""",
+					"""check""",
+					"""type""",
+					"""decode"""
 				]
 				for test_case in test_cases:
 					args = [
 						str(thepython),
 						str("-m"),
-						str("BET64.BET64"),
+						str("BET64"),
 						str("{}").format(
 							str(
 								test_case
@@ -275,7 +275,7 @@ class BasicUsageTestSuite(unittest.TestCase):
 					args = [
 						str(thepython),
 						str("-m"),
-						str("BET64.BET64"),
+						str("BET64"),
 						str("{}").format(
 							str(
 								test_case
@@ -303,18 +303,17 @@ class BasicUsageTestSuite(unittest.TestCase):
 				theResult = False
 		assert theResult
 
-	@unittest.expectedFailure
 	def test_bad_template_case(self):
 		"""Test case template for profiling"""
 		theResult = False
 		thepython = getPythonCommand()
 		if (thepython is not None):
 			try:
-				for test_case in ["""--type"""]:
+				for test_case in ["""type"""]:
 					args = [
 						str(thepython),
 						str("-m"),
-						str("BET64.BET64"),
+						str("BET64"),
 						str("{}").format(
 							str(
 								test_case

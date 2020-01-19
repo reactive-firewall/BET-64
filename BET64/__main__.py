@@ -17,20 +17,9 @@
 # limitations under the License.
 
 
-# __version__ = """1.0.1"""
-# """This is version 1.0.1 of BET-64"""
-
 try:
 	import sys
-	import os
-	if 'BET64' in __file__:
-		__sys_path__ = os.path.abspath(os.path.join(os.path.dirname(__file__), '.'))
-		if __sys_path__ not in sys.path:
-			sys.path.insert(0, __sys_path__)
 except Exception as ImportErr:
-	print(str(type(ImportErr)))
-	print(str(ImportErr))
-	print(str((ImportErr.args)))
 	ImportErr = None
 	del ImportErr
 	raise ImportError(str("BET-64 Failed to Import"))
